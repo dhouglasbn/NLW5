@@ -1,0 +1,10 @@
+{
+  "name": "nlw5",
+  "version": "1.0.0",
+  "description": "event from rocketseat, development with nodejs and websocket",
+  "main": "index.js",
+  "repository": "https://github.com/dhouglasbn/NLW5.git",
+  "author": "Dhouglas Bandeira",
+  "license": "MIT",
+  "private": false
+}
