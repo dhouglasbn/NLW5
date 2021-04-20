@@ -7,7 +7,5 @@
   "author": "Dhouglas Bandeira",
   "license": "MIT",
   "private": false,
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+  "dependencies": {}
 }
