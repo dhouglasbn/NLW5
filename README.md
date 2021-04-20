@@ -7,4 +7,5 @@
 ```
 yarn init (use a form)
 yarn init -y (autocomplete form)
+yarn tsc --init (create tsconfig.json)
 ```
