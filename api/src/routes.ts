@@ -4,7 +4,7 @@ import { SettingsRepository } from "./repositories/SettingsRepository";
 
 const routes = Router();
 
-routes.post("./settings", async (request, response) => {
+routes.post("/settings", async (request, response) => {
     // coletar dados da requisição
     const { chat, username } = request.body;
 
