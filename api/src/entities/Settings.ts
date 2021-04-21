@@ -6,7 +6,7 @@ import { Entity,
 
 import { v4 as uuid } from "uuid";
 
-
+// criando entidade da tabela settings
 @Entity("settings")
 class Setting {
 
@@ -25,6 +25,7 @@ class Setting {
     @CreateDateColumn()
     created_at: Date
 
+    // constructor é uma função que é chamada assim que a classe é instanciada
     constructor() {
         if(!this.id) {
             this.id = uuid()
