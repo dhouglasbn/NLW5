@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
 import { SettingsRepository } from "../repositories/SettingsRepository";
+import { SettingsService } from "../services/SettingsService";
 
 
 
@@ -9,17 +10,11 @@ class SettingsController {
         // coletar dados da requisição
         const { chat, username } = request.body;
 
-        // pegar o repositório
-        const settingsRepository = getCustomRepository(SettingsRepository);
+        // instanciando a class SettingsService
+        const settingsService = new SettingsService();
 
-        // criar representação do objeto
-        const settings = settingsRepository.create({
-            chat,
-            username
-        })
-
-        // salvar o objeto
-        await settingsRepository.save(settings);
+        // chamando a função create do settingsService
+        const settings = await settingsService.create({chat, username});
 
         // retornar resposta
         return response.json(settings);
