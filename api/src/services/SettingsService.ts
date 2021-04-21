@@ -14,6 +14,16 @@ class SettingsService {
         // pegar o repositório
         const settingsRepository = getCustomRepository(SettingsRepository);
 
+        // tentar encontra username no banco de dados
+        const userAlreadyExists = await settingsRepository.findOne({
+            username
+        })
+
+        // verificar se usuário já existe
+        if (userAlreadyExists) {
+            throw new Error("User already exists!")
+        }
+
         // criar representação do objeto
         const settings = settingsRepository.create({
             chat,

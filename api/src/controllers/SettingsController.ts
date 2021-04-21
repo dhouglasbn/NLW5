@@ -13,11 +13,18 @@ class SettingsController {
         // instanciando a class SettingsService
         const settingsService = new SettingsService();
 
-        // chamando a função create do settingsService
-        const settings = await settingsService.create({chat, username});
+        try {
+            // chamando a função create do settingsService
+            const settings = await settingsService.create({chat, username});
 
-        // retornar resposta
-        return response.json(settings);
+            // retornar resposta de sucesso
+            return response.json(settings)
+        } catch (error) {
+            // retornar resposta de erro
+            return response.status(400).json({
+                message: error.message
+            })
+        }
     }
 }
 
