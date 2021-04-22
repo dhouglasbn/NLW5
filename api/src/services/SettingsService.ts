@@ -51,6 +51,21 @@ class SettingsService {
         // retornar essa array de settings
         return settings;
     }
+
+    async update(username: string, chat: boolean ) {
+        // fazendo requisição query para:
+        // atualizar na tabela settings
+        // alterar valor de chat onde username tiver o valor da requisição
+        // colocaro valor de chat no valor da requisição
+        const settings = await this.settingsRepository
+        .createQueryBuilder()
+        .update(Setting)
+        .set({chat})
+        .where("username = :username", {
+            username
+        })
+        .execute()
+    }
 }
 
 export { SettingsService }

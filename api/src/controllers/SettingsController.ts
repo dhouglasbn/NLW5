@@ -40,6 +40,21 @@ class SettingsController {
         // retornar essa array de settings
         return response.json(settings);
     }
+
+    async update(request: Request, response: Response) {
+        // coleta de dados da requisição
+        const { username } = request.params;
+        const { chat } = request.body;
+
+        // instanciando a service de settings
+        const settingsService = new SettingsService();
+
+        // tentar encontrar na table settings tudo aquilo q tem username
+        const settings = await settingsService.update(username, chat);
+
+        // retornar essa array de settings
+        return response.json(settings);
+    }
 }
 
 export { SettingsController }
