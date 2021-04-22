@@ -19,24 +19,28 @@ class MessagesService {
 
     async create({admin_id, text, user_id}: IMessageCreate) {
 
-
+        // criando modelo dos valores das colunas do DB
         const message = this.messagesRepository.create({
             admin_id,
             text,
             user_id
         })
 
+        // salvando meus dados no DB
         await this.messagesRepository.save(message);
 
+        // retornando message
         return message;
     }
 
     async listByUser (user_id: string) {
+        // encontrar no banco de dados tudo aquilo que tiver user_id e pondo os dados da tabela user
         const list = await this.messagesRepository.find({
             where: { user_id },
             relations: ["user"]
         })
 
+        // retornando lista com todas as mensagens do usuário e dados do usuário
         return list;
     }
 }

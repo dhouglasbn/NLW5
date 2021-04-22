@@ -14,7 +14,7 @@ class SettingsController {
         const settingsService = new SettingsService();
 
         try {
-            // chamando a função create do settingsService
+            // inserindo dados na tabela settings
             const settings = await settingsService.create({chat, username});
 
             // retornar resposta de sucesso

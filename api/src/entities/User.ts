@@ -13,7 +13,7 @@ class User {
     @CreateDateColumn()
     created_at: Date;
     
-    // constructor é uma função que é chamada assim que a classe é instanciada
+    // criar uma uuid assim que a classe for instanciada
     constructor() {
         if(!this.id) {
             this.id = uuid()
