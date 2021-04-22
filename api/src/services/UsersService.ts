@@ -33,6 +33,14 @@ class UsersService {
 
         return user;
     }
+
+    async findByEmail(email: string) {
+        // encontrar usuário com tal email
+        const user = await this.usersRepository.findOne({ email });
+      
+        // retornar dados do usuário
+        return user;
+      }
 }
 
 export { UsersService }

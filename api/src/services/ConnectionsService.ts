@@ -35,6 +35,17 @@ class ConnectionsService {
         // retornando a array connection
         return connection
     }
+
+    async FindByUserId (user_id: string) {
+
+        // procurar na tabela connections tudo aquilo que tiver user_id
+        const connection = await this.connectionsRepository.findOne({
+            user_id
+        });
+
+        // retorna uma array dessas connections
+        return connection;
+    }
 }
 
 export { ConnectionsService }

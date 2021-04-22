@@ -10,6 +10,7 @@ import { v4 as uuid } from "uuid";
 import { User } from "./User";
 
 // criando a entidade da tabela messages
+@Entity("connections")
 class Connection{
     @PrimaryColumn()
     id: string;
