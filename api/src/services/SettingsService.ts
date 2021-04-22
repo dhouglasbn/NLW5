@@ -40,6 +40,17 @@ class SettingsService {
         
         return settings;
     }
+
+    async findByUsername (username: string) {
+
+        // encontrar na minha table settings tudo aquilo q tem username
+        const settings = await this.settingsRepository.findOne({
+            username
+        })
+
+        // retornar essa array de settings
+        return settings;
+    }
 }
 
 export { SettingsService }

@@ -26,6 +26,20 @@ class SettingsController {
             })
         }
     }
+
+    async findByUsername(request: Request, response: Response) {
+        // coleta de dados da requisição
+        const { username } = request.params;
+
+        // instanciando a service de settings
+        const settingsService = new SettingsService();
+
+        // tentar encontrar na table settings tudo aquilo q tem username
+        const settings = await settingsService.findByUsername(username);
+
+        // retornar essa array de settings
+        return response.json(settings);
+    }
 }
 
 export { SettingsController }

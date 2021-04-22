@@ -14,6 +14,7 @@ const messagesController = new MessagesController();
 
 // rotas
 routes.post("/settings", settingsController.create); // entrar no chat
+routes.get("/settings/:username", settingsController.findByUsername) // listar settings por username
 
 routes.post("/users", usersController.create); // criar user
 
