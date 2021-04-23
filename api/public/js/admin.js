@@ -53,6 +53,47 @@ function call(id) {
 
     // emitindo em admin_list_messages_by_user as params e parametro messages
     socket.emit("admin_list_messages_by_user", params, messages => {
-        console.log("Messages", messages)
+
+        // pegando o elemento html responsável pelas mensagens do meu user
+        const divMessages = document.getElementById(
+            `allMessages${connection.user_id}`
+        )
+
+        // paracada mensagem dentro da array messages ele vai fzr oseguinte
+        messages.forEach(message => {
+            // criar uma div e atribuir a create div
+            const createDiv = document.createElement("div");
+
+            // se for uma mensagem de cliente
+            if (message.admin_id === null) {
+                // atribuir a createDiv uma classse com esse nome
+                createDiv.className = "admin_message_client";
+
+                // colocar dentro de div uma span com email e mensagem do user
+                createDiv.innerHTML = `<span>${connection.user.email} - ${message.text}</span>`;
+
+                // formatar dentro de div a data de criação da mensagem
+                createDiv.innerHTML = `<span class="admin_date>${dayjs(
+                    message.created_at
+                ).format("DD/MM/YYYY HH:mm:ss")}`;
+
+            } else {
+                // se for mensagem de admin
+
+                // nomear uma classe com esse nome para o elemento
+                createDiv.className = "admin_message_admin";
+
+                // colocar esse valor dentro do elemento de createDiv
+                createDiv.innerHTML = `Atendente: <span>${message.text}</span>`;
+
+                // adicionar uma span com valor de criação da mensagem com formatação citada
+                createDiv.innerHTML += `<span class="admin_date>${dayjs(
+                    message.created_at
+                ).format("DD/MM/YYYY HH:mm:ss")}`;
+            }
+
+            // ao final de cada processo adicionar uma createDiv
+            divMessages.appendChild(createDiv);
+        })
     })
-}
+};
