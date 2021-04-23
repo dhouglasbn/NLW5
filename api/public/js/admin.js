@@ -59,7 +59,7 @@ function call(id) {
             `allMessages${connection.user_id}`
         )
 
-        // paracada mensagem dentro da array messages ele vai fzr oseguinte
+        // para cada mensagem dentro da array messages ele vai fzr oseguinte
         messages.forEach(message => {
             // criar uma div e atribuir a create div
             const createDiv = document.createElement("div");
@@ -70,12 +70,13 @@ function call(id) {
                 createDiv.className = "admin_message_client";
 
                 // colocar dentro de div uma span com email e mensagem do user
-                createDiv.innerHTML = `<span>${connection.user.email} - ${message.text}</span>`;
+                createDiv.innerHTML = `<span> ${connection.user.email} </span>`;
+                createDiv.innerHTML += `<span> ${message.text} </span>`
 
                 // formatar dentro de div a data de criação da mensagem
-                createDiv.innerHTML = `<span class="admin_date>${dayjs(
+                createDiv.innerHTML += `<span class="admin_date">${dayjs(
                     message.created_at
-                ).format("DD/MM/YYYY HH:mm:ss")}`;
+                ).format("DD/MM/YYYY HH:mm:ss")} </span>`;
 
             } else {
                 // se for mensagem de admin
@@ -87,9 +88,9 @@ function call(id) {
                 createDiv.innerHTML = `Atendente: <span>${message.text}</span>`;
 
                 // adicionar uma span com valor de criação da mensagem com formatação citada
-                createDiv.innerHTML += `<span class="admin_date>${dayjs(
+                createDiv.innerHTML += `<span class="admin_date">${dayjs(
                     message.created_at
-                ).format("DD/MM/YYYY HH:mm:ss")}`;
+                ).format("DD/MM/YYYY HH:mm:ss")} </span>`;
             }
 
             // ao final de cada processo adicionar uma createDiv
