@@ -122,7 +122,7 @@ function sendMessage(id) {
     createDiv.className = "admin_message_admin";
 
     // colocar esse valor dentro do elemento de createDiv
-    createDiv.innerHTML = `Atendente: <span>${parmas.text}</span>`;
+    createDiv.innerHTML = `Atendente: <span>${params.text}</span>`;
 
     // adicionar uma span com valor de criação da mensagem com formatação citada
     createDiv.innerHTML += `<span class="admin_date">${dayjs(
@@ -132,3 +132,7 @@ function sendMessage(id) {
 
     text.value = ""
 }
+
+socket.on("admin_receive_message", data => {
+    console.log(data);
+})

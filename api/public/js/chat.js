@@ -1,8 +1,9 @@
 let socket_admin_id = null;
 let emailUser = null;
+let socket = null
 
 document.querySelector("#start_chat").addEventListener("click", (event) => {
-    const socket = io();
+    socket = io();
     
 
     const chat_help = document.getElementById("chat_help");
@@ -96,13 +97,15 @@ document.querySelector("#send_message_button").addEventListener("click", event =
     const template_client = document.getElementById("message-user-template").innerHTML;
 
     // atribuindo a rendered um elemento com message e email
-    const rendered = Mustacher.render(template_client, {
+    const rendered = Mustache.render(template_client, {
         message: text.value,
         email: emailUser
     });
 
     // adicionando rendered a messages
     document.getElementById("messages").innerHTML += rendered;
+
+    text.value = "";
 })
 
 
