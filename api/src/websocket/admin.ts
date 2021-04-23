@@ -9,7 +9,7 @@ io.on("connect", async socket => {
     const messagesService = new MessagesService();
 
     // encontrarndo todas as conexões
-    const allConnectionsWithoutAdmin = await connectionsService.findAllWIthoutAdmin();
+    const allConnectionsWithoutAdmin = await connectionsService.findAllWithoutAdmin();
 
     // emitindo uma ws com essa array de conexões sem admin
     io.emit("admin_list_all_users", allConnectionsWithoutAdmin);
@@ -53,7 +53,7 @@ io.on("connect", async socket => {
             await connectionsService.updateAdminID(user_id, socket.id);
 
             // encontrarndo todas as conexões
-            const allConnectionsWithoutAdmin = await connectionsService.findAllWIthoutAdmin();
+            const allConnectionsWithoutAdmin = await connectionsService.findAllWithoutAdmin();
 
             // emitindo uma ws com essa array de conexões sem admin
             io.emit("admin_list_all_users", allConnectionsWithoutAdmin);

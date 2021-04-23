@@ -47,7 +47,7 @@ class ConnectionsService {
         return connection;
     }
 
-    async findAllWIthoutAdmin() {
+    async findAllWithoutAdmin() {
         // procurar na DB tudo aquele que admin_id === null
         const connections = await this.connectionsRepository.find({
             where: { admin_id: null },
