@@ -56,7 +56,17 @@ document.querySelector("#start_chat").addEventListener("click", (event) => {
     })
 
     socket.on("admin_send_to_client", message => {
-        console.log(message);
+
+        // pegando o conteúdo da div admin-template
+        const template_admin = document.getElementById("admin-template").innerHTML;
+
+        // atribuindo a rendered uma renderização da mensagem do admin
+        const rendered = Mustache.render(template_admin, {
+            message_admin: message.text
+        });
+
+        // adicionando rendered ao conteúdo do elemento messages
+        document.getElementById("messages").innerHTML += rendered;
     })
 });
 
