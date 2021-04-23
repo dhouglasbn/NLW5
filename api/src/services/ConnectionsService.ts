@@ -65,6 +65,21 @@ class ConnectionsService {
 
         return connection;
     }
+
+    async updateAdminID(user_id: string, admin_id: string) {
+        // fazendo requisição query para:
+        // atualizar na tabela settings
+        // alterar valor de chat onde username tiver o valor da requisição
+        // colocaro valor de chat no valor da requisição
+        await this.connectionsRepository
+        .createQueryBuilder()
+        .update(Connection)
+        .set({ admin_id })
+        .where("user_id = :user_id", {
+            user_id
+        })
+        .execute()
+    }
 }
 
 export { ConnectionsService }

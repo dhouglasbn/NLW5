@@ -51,6 +51,8 @@ function call(id) {
         user_id: connection.user_id
     }
 
+    socket.emit("admin_user_in_support", params);
+
     // emitindo em admin_list_messages_by_user as params e parametro messages
     socket.emit("admin_list_messages_by_user", params, messages => {
 
