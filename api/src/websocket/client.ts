@@ -41,17 +41,17 @@ io.on("connect", socket => {
 
             user_id = user.id;
         } else {
-
-            user_id = userExists.id;
             // encontrou usuário
 
+            user_id = userExists.id;
+            
             // tentar encontrar na table connections tudo aquilo que tiver a id do meu user
             const connection = await connectionsService.FindByUserId(userExists.id);
 
             // se não há conexão nenhuma no banco de dados
             if(!connection) {
 
-                // ssalvar no banco de dados uma connection com a id da minha conexão socket 
+                // salvar no banco de dados uma connection com a id da minha conexão socket 
                 // e o id do meu usuário como valor de user_id
                 await connectionsService.create({
                     socket_id,
@@ -73,5 +73,9 @@ io.on("connect", socket => {
             text,
             user_id
         })
+
+        const allMessages = await messagesService.listByUser(user_id);
+
+        socket.emit("client_list_all_messages", allMessages);
     })
 })
