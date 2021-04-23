@@ -86,7 +86,7 @@ document.querySelector("#send_message_button").addEventListener("click", event =
 
     // colocando o text e o socket_id do admin em params
     const params = {
-        text,
+        text: text.value,
         socket_admin_id
     }
 

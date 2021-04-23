@@ -134,5 +134,27 @@ function sendMessage(id) {
 }
 
 socket.on("admin_receive_message", data => {
-    console.log(data);
+
+    // procurar a connection com a socket id da requisição e atruibuir a connection
+    const connection = connectionsUsers.find(connection => connection.socket_id === data.socket_id)
+
+    // pegando o elemento de chatbox (allMessages do user)
+    const divMessages = document.getElementById(`allMessages${connection.user_id}`); 
+
+    // criar uma div e atribuir a createDiv
+    const createDiv = document.createElement("div");
+    
+    // atribuir a createDiv uma classse com esse nome
+    createDiv.className = "admin_message_client";
+
+    // colocar dentro de div uma span com email e mensagem do user
+    createDiv.innerHTML = `<span> ${connection.user.email} </span>`;
+    createDiv.innerHTML += `<span> ${data.message.text} </span>`
+
+    // formatar dentro de div a data de criação da mensagem
+    createDiv.innerHTML += `<span class="admin_date">${dayjs(
+        data.message.created_at
+    ).format("DD/MM/YYYY HH:mm:ss")} </span>`;
+
+    divMessages.appendChild(createDiv);
 })
