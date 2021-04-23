@@ -25,4 +25,27 @@ io.on("connect", async socket => {
         // retornando de volta la para minha função call do admin.js
         callback(allMessages);
     })
+
+    socket.on("admin_send_message", async params => {
+        // qnd o admin.js emitir esse emit
+
+        // pegando user_id, text dos params da emissão
+        const { user_id, text } = params;
+
+        // salvar esses dados na table messages
+        await messagesService.create({
+            text,
+            user_id,
+            admin_id: socket.id
+        });
+
+        // pegar o socket id pela table de connections
+        const { socket_id } = await connectionsService.FindByUserId(user_id);
+
+        // emitindo essa emit com text e a socket_id do chat com o user
+        io.to(socket_id).emit("admin_send_to_client", {
+            text,
+            socket_id: socket.id
+        })
+    })
 })

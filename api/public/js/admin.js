@@ -98,3 +98,17 @@ function call(id) {
         })
     })
 };
+
+function sendMessage(id) {
+    // pegando a mensagem no html referenciado pela sua id
+    const text = document.getElementById(`send_message_${id}`);
+
+    // parametros a serem utilizados frequentemente nesse escopo 
+    const params = {
+        text: text.value,
+        user_id: id
+    }
+
+    // emitindo esses params para o server ws
+    socket.emit("admin_send_message", params);
+}
