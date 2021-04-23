@@ -111,4 +111,24 @@ function sendMessage(id) {
 
     // emitindo esses params para o server ws
     socket.emit("admin_send_message", params);
+
+    // pegando o elemento de chatbox (allMessages do user)
+    const divMessages = document.getElementById(`allMessages${id}`);
+
+    // criar uma div e atribuir a createDiv
+    const createDiv = document.createElement("div");
+
+    // nomear uma classe com esse nome para o elemento
+    createDiv.className = "admin_message_admin";
+
+    // colocar esse valor dentro do elemento de createDiv
+    createDiv.innerHTML = `Atendente: <span>${parmas.text}</span>`;
+
+    // adicionar uma span com valor de criação da mensagem com formatação citada
+    createDiv.innerHTML += `<span class="admin_date">${dayjs(
+    ).format("DD/MM/YYYY HH:mm:ss")} </span>`;
+
+    divMessages.appendChild(createDiv);
+
+    text.value = ""
 }
