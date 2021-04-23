@@ -77,5 +77,29 @@ io.on("connect", socket => {
         const allMessages = await messagesService.listByUser(user_id);
 
         socket.emit("client_list_all_messages", allMessages);
+    });
+
+    // na emissão do clientToAdmin ...
+    socket.on("client_send_to_admin", async params => {
+        // desestruturar text e socket_admin_id das params
+        const { text, socket_admin_id } = params;
+
+        // atribuindo a socket_id o id da socket
+        const socket_id = socket.id;
+
+        // consultando conexão pelo socket_id e coletando a user_id
+        const { user_id } =  await connectionsService.findBySocketId(socket_id);
+
+        // salvar na table messages a mensagem do usuário requerinte
+        const message = await messagesService.create({
+            text,
+            user_id
+        });
+
+        // emitindo esta emmit com message e socket_id para o server ws
+        io.to(socket_admin_id).emit("admin_receive_message", {
+            message,
+            socket_id
+        })
     })
 })

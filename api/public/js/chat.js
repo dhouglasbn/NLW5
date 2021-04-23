@@ -1,4 +1,5 @@
 let socket_admin_id = null;
+let emailUser = null;
 
 document.querySelector("#start_chat").addEventListener("click", (event) => {
     const socket = io();
@@ -12,6 +13,8 @@ document.querySelector("#start_chat").addEventListener("click", (event) => {
     
 
     const email = document.getElementById("email").value;
+    emailUser = email;
+
     const text = document.getElementById("txt_help").value;
 
     socket.on("connect", () => {
@@ -88,6 +91,18 @@ document.querySelector("#send_message_button").addEventListener("click", event =
 
     // emitindo este emit junto com os params
     socket.emit("client_send_to_admin", params)
+
+    // atribuindo a template_client o seguinte elemento html
+    const template_client = document.getElementById("message-user-template").innerHTML;
+
+    // atribuindo a rendered um elemento com message e email
+    const rendered = Mustacher.render(template_client, {
+        message: text.value,
+        email: emailUser
+    });
+
+    // adicionando rendered a messages
+    document.getElementById("messages").innerHTML += rendered;
 })
 
 
