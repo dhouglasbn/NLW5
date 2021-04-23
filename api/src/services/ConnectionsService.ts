@@ -46,6 +46,16 @@ class ConnectionsService {
         // retorna uma array dessas connections
         return connection;
     }
+
+    async findAllWIthoutAdmin() {
+        // procurar na DB tudo aquele que admin_id === null
+        const connections = await this.connectionsRepository.find({
+            where: { admin_id: null },
+            relations: ["user"]
+        });
+
+        return connections;
+    }
 }
 
 export { ConnectionsService }
