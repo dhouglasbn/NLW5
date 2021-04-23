@@ -1,3 +1,5 @@
+let socket_admin_id = null;
+
 document.querySelector("#start_chat").addEventListener("click", (event) => {
     const socket = io();
     
@@ -56,6 +58,7 @@ document.querySelector("#start_chat").addEventListener("click", (event) => {
     })
 
     socket.on("admin_send_to_client", message => {
+        socket_admin_id = message.socket_id;
 
         // pegando o conteúdo da div admin-template
         const template_admin = document.getElementById("admin-template").innerHTML;
@@ -69,5 +72,22 @@ document.querySelector("#start_chat").addEventListener("click", (event) => {
         document.getElementById("messages").innerHTML += rendered;
     })
 });
+
+// há um listener que fica vendo quando o botão é clicado
+// quando for clicado vai rodar o seguint script
+document.querySelector("#send_message_button").addEventListener("click", event => {
+
+    // pegar o elemento de mensagem do usuário
+    const text = document.getElementById("message_user");
+
+    // colocando o text e o socket_id do admin em params
+    const params = {
+        text,
+        socket_admin_id
+    }
+
+    // emitindo este emit junto com os params
+    socket.emit("client_send_to_admin", params)
+})
 
 
