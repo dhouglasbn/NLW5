@@ -8,9 +8,14 @@ import { routes } from "./routes";
 
 const app = express();
 
+// informar ao node:
+// utilizar arquivos estáticos(html, css, imgs etc ...)
 app.use(express.static(path.join(__dirname, "..", "public")))
+// onde estão meus arquivos estáticos
 app.set("views", path.join(__dirname, "..", "public"));
+// que tipo de arquivo eu quero renderizar(utilizando ejs)
 app.engine("html", require("ejs").renderFile);
+// informar que engine vou usar pra fzr isso e que tipo de arquivo quero renderizar
 app.set("view engine", "html");
 
 app.get("/pages/client", (request, response) => {
