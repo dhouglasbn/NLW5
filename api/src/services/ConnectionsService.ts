@@ -59,7 +59,7 @@ class ConnectionsService {
 
     async findBySocketId (socket_id: string) {
         // consultar na DB uma conexão com socket_id que foi passado como argumento
-        const connection = await this. connectionsRepository.findOne({
+        const connection = await this.connectionsRepository.findOne({
             socket_id
         });
 
@@ -80,6 +80,16 @@ class ConnectionsService {
         })
         .execute()
     }
+
+    async deleteBySocketId(socket_id: string) {
+        await this.connectionsRepository
+          .createQueryBuilder()
+          .delete()
+          .where("socket_id = :socket_id", {
+            socket_id,
+          })
+          .execute();
+      }
 }
 
 export { ConnectionsService }

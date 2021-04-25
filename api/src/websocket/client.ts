@@ -80,7 +80,7 @@ io.on("connect", socket => {
 
         const allUsers = await connectionsService.findAllWithoutAdmin();
 
-        io.emit("admin_list_all_users", allMessages);
+        io.emit("admin_list_all_users", allUsers);
     });
 
     // na emissão do clientToAdmin ...
@@ -105,5 +105,9 @@ io.on("connect", socket => {
             message,
             socket_id
         })
+    })
+
+    socket.on("disconnect", async () => {
+        await connectionsService.deleteBySocketId(socket.id);
     })
 })
