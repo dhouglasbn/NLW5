@@ -1,8 +1,12 @@
+// atribuir ao socket io() para usar as ferramentas do socket.io
 const socket = io();
+
+// declarando essa array que irá ser mutada durante o código
 let connectionsUsers = []
 
 // quando for emitido a admin_list_all_users
 socket.on("admin_list_all_users", connections => {
+    // passando para connections users os parametros que irão vir na conexão socket
     connectionsUsers = connections;
 
     // informações de html que vão ser alteradas
@@ -130,11 +134,14 @@ function sendMessage(id) {
     createDiv.innerHTML += `<span class="admin_date">${dayjs(
     ).format("DD/MM/YYYY HH:mm:ss")} </span>`;
 
+    // colocar no conteúdo de divMessages a createDiv
     divMessages.appendChild(createDiv);
 
+    // apagando o valor de text
     text.value = ""
 }
 
+// quando for emitida a "admin_receive_message":
 socket.on("admin_receive_message", data => {
 
     // procurar a connection com a socket id da requisição e atruibuir a connection
@@ -158,5 +165,6 @@ socket.on("admin_receive_message", data => {
         data.message.created_at
     ).format("DD/MM/YYYY HH:mm:ss")} </span>`;
 
+    // adicionando ao conteúdo de divMessages a createDiv
     divMessages.appendChild(createDiv);
 })
