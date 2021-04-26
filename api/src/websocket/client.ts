@@ -107,7 +107,7 @@ io.on("connect", socket => {
         })
     })
 
-    socket.on("disconnect", async () => {
-        await connectionsService.deleteBySocketId(socket.id);
-    })
+//     socket.on("disconnect", async () => {
+//         await connectionsService.deleteBySocketId(socket.id);
+//     })
 })
