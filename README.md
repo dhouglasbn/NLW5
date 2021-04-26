@@ -2,6 +2,11 @@
 
 ### building an app with nodeJS and WebSocket!
 
+today is monday, when I committed this project for tha last time
+so I conclude that i learned a lot of socket.io tools and how it works
+and i learned more about typeorm, entities and repositories 
+that was the next level week #5
+
 ## terminal codes:
 
 ```
